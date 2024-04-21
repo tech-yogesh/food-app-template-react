@@ -38,7 +38,8 @@ export default function MenuCard({
     name,
     description,
     price,
-    image
+    image,
+    addItem
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -64,11 +65,12 @@ export default function MenuCard({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Link to='/orders'>
-        <IconButton aria-label="add to cart">
+        
+        <IconButton aria-label="add to cart" onClick={addItem}>
           <AddShoppingCartIcon />
         </IconButton>
-        </Link>
+        <Typography variant='caption'>Click to add more</Typography>
+       
       </CardActions>
      
     </Card>

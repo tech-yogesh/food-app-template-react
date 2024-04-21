@@ -1,28 +1,26 @@
-// action - state management
 
 
-//-----------------------|| ACCOUNT REDUCER ||-----------------------//
+const cart = [
 
-const cart = {
-
-}
+]
 
 const accountReducer = (state=cart, action) => {
     switch (action.type) {
-        case 'Add': {
-            const { isLoggedIn, user } = action.payload;
-            return {
+        case 'ADD': {
+            return [
+                action.data,
                 ...state,
-            };
+            ];
         }
         case "REMOVE": {
-            const { user } = action.payload;
-            return {
+            const arr = state.filter(item=>item.id !== action.data.id)
+            return [
+                ...arr,
                 ...state,
-            };
+            ];
         }
         default: {
-            return { ...state };
+            return [ ...state ];
         }
     }
 };

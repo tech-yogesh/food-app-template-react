@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { useSelector } from "react-redux";
 // material-ui
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
@@ -257,13 +257,15 @@ const OrderList = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const counter = useSelector(state => state.cart)
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [search, setSearch] = React.useState("");
-  const [rows, setRows] = React.useState(rowsInitial);
+  const [rows, setRows] = React.useState(counter);
 
   const handleSearch = (event) => {
     const newString = event.target.value;
@@ -404,11 +406,11 @@ const OrderList = () => {
                         }}
                       >
                         {" "}
-                        Food One{" "}
+                        {row.name}{" "}
                       </Typography>
                     </TableCell>
 
-                    <TableCell align="right">50$</TableCell>
+                    <TableCell align="right">{row.price}</TableCell>
 
                     <TableCell align="center">
                       <Chip label="Add More" size="small" chipcolor="primary" />

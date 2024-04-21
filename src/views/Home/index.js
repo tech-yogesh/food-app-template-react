@@ -5,7 +5,9 @@ import HomeMenu from '../../components/Menu';
 import MenuAppBar from '../../components/Header';
 const Home = ()=>{
     return (
+        
         <Grid container justifyContent='center' alignItems='center'>
+            <Grid style={{maxWidth:"1024px"}}>
             <Grid item={12}>
                 <MenuAppBar/>
             </Grid>
@@ -17,7 +19,7 @@ const Home = ()=>{
             </Grid>
              
         </Grid>
-    
+        </Grid>
     )
 
 }

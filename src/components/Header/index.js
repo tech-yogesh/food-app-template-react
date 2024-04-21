@@ -1,13 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
+  const cart = useSelector(state => state.cart)
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -40,27 +43,34 @@ export default function MenuAppBar() {
   };
 
   return (
+    
     <div className={classes.root}>
     
-      <AppBar>
+      <AppBar position='fixed'>
         <Toolbar>
+            <Link to='/'>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <HomeIcon style={{color:"white"}}/>
           </IconButton>
+          </Link>
           <Typography variant="h6" className={classes.title}>
             Food App
           </Typography>
       
             <div>
+                
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
+                color='secondary'
+                disabled={cart.length===0 ? true : false}
               >
-                <AccountCircle />
+                <Link to='/orders'>
+               <Typography variant='h6' style={{color:"white"}}>Orders{' '}{cart.length}</Typography>
+               </Link>
               </IconButton>
+             
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}

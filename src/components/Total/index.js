@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 
 // material-ui
 import { Box, Button, Grid, Typography, Card } from "@material-ui/core";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const OrderDetails = () => {
   const componentRef = useRef();
+  const counter = useSelector(state => state.cart)
 
   // set selected tab
   const [value, setValue] = React.useState(0);
@@ -25,6 +27,18 @@ const OrderDetails = () => {
     setOpen(false);
   };
 
+  const addAll = ()=>{
+    let add = 0.00;
+    if(counter.length>0){
+      for(let i=0;i<counter.length;i++) {
+        add = add + counter.price
+      }
+      return add
+    }else{
+        return 0;
+    }
+  }
+
   return (
     <Grid
       container
@@ -34,8 +48,8 @@ const OrderDetails = () => {
     >
       <Grid item>
         <Card title="ORDER STATUS">
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={12} lg={12}>
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item xs={12} md={12} lg={10}>
               <Grid container spacing={0}>
                 <Grid item xs={12} sm={12} md={6} lg={3}>
                   <Grid container spacing={1}>
@@ -43,7 +57,7 @@ const OrderDetails = () => {
                       <Typography variant="h5">Order Place Date</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                      <Typography variant="body2">10th Mar, 2021</Typography>
+                      <Typography variant="body2">{new Date().toLocaleDateString()}</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -64,7 +78,7 @@ const OrderDetails = () => {
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="body2">
-                        Fedex Express Delivery
+                        Express Delivery
                       </Typography>
                     </Grid>
                   </Grid>
@@ -85,7 +99,7 @@ const OrderDetails = () => {
                       <Typography variant="h5">Order Amount</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                      <Typography variant="body2">$90,020</Typography>
+                      <Typography variant="body2">{addAll()}</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -97,8 +111,8 @@ const OrderDetails = () => {
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
                     <Button>
-                      <Link to="/shipping">
-                        <Button variant="contained" color="primary">
+                      <Link to="/shipping" disabled={counter.length>0 ? false: true}>
+                        <Button variant="contained" color="primary" >
                           CheckOut
                         </Button>
                       </Link>
