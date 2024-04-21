@@ -107,7 +107,7 @@ const OrderDetails = () => {
             </Grid>
 
             <Grid item md={4} lg={3}>
-              <Box sx={{ display: { xs: "none", md: "block" } }}>
+              
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
                     <Button>
@@ -119,7 +119,7 @@ const OrderDetails = () => {
                     </Button>
                   </Grid>
                 </Grid>
-              </Box>
+              
             </Grid>
           </Grid>
         </Card>

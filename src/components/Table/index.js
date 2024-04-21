@@ -334,7 +334,8 @@ const OrderList = () => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <>
+    <Grid container justifyContent="center" alignItems="center">
+      <Grid item xs={12}>
       <CardContent>
         <Grid
           container
@@ -360,8 +361,9 @@ const OrderList = () => {
           </Grid>
         </Grid>
       </CardContent>
-
+      </Grid>
       {/* table */}
+      <Grid item xs={12}>
       <TableContainer>
         <Table className={classes.table} aria-labelledby="tableTitle">
           <TableBody>
@@ -435,8 +437,9 @@ const OrderList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
+      </Grid>
       {/* table pagination */}
+      <Grid item xs={12}>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
@@ -446,7 +449,8 @@ const OrderList = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </>
+      </Grid>
+    </Grid>
   );
 };
 
