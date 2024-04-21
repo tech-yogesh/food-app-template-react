@@ -31,7 +31,7 @@ const OrderDetails = () => {
     let add = 0.00;
     if(counter.length>0){
       for(let i=0;i<counter.length;i++) {
-        add = add + counter.price
+        add = add + counter[i].price
       }
       return add
     }else{
@@ -45,6 +45,7 @@ const OrderDetails = () => {
       justifyContent="center"
       alignItems="center"
       direction="column"
+      key={counter}
     >
       <Grid item>
         <Card title="ORDER STATUS">
@@ -54,7 +55,7 @@ const OrderDetails = () => {
                 <Grid item xs={12} sm={12} md={6} lg={3}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h5">Order Place Date</Typography>
+                      <Typography variant="h6">Order Place Date</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="body2">{new Date().toLocaleDateString()}</Typography>
@@ -64,7 +65,7 @@ const OrderDetails = () => {
                 <Grid item xs={12} sm={6} md={6} lg={2}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h5">Order Status</Typography>
+                      <Typography variant="h6">Order Status</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="body2">Processing</Typography>
@@ -74,7 +75,7 @@ const OrderDetails = () => {
                 <Grid item xs={12} sm={6} md={4} lg={3}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h5">Delivery Option</Typography>
+                      <Typography variant="h6">Delivery Option</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="body2">
@@ -86,7 +87,7 @@ const OrderDetails = () => {
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h5">Payment</Typography>
+                      <Typography variant="h6">Payment</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="body2">Credit Card</Typography>
@@ -96,7 +97,7 @@ const OrderDetails = () => {
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h5">Order Amount</Typography>
+                      <Typography variant="h6">Order Amount</Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="body2">{addAll()}</Typography>
@@ -106,13 +107,13 @@ const OrderDetails = () => {
               </Grid>
             </Grid>
 
-            <Grid item md={4} lg={3}>
+            <Grid item md={4} lg={12}>
               
-                <Grid container spacing={1}>
-                  <Grid item xs={12}>
+                <Grid container spacing={1} justifyContent='center'>
+                  <Grid item>
                     <Button>
                       <Link to="/shipping" disabled={counter.length>0 ? false: true}>
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" disabled={counter.length>0 ? false: true}>
                           CheckOut
                         </Button>
                       </Link>

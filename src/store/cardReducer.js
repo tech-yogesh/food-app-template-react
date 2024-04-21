@@ -13,10 +13,9 @@ const accountReducer = (state=cart, action) => {
             ];
         }
         case "REMOVE": {
-            const arr = state.filter(item=>item.id !== action.data.id)
+            const arr = state.filter(item=>item.id !== action.data.id);
             return [
-                ...arr,
-                ...state,
+               ...arr
             ];
         }
         default: {

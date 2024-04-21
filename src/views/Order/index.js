@@ -44,9 +44,10 @@ export default function Shipping() {
       });
   return (
     <Grid container justifyContent="center" alignItems="center">
-        <Grid item x={12}>
+        <Grid item xs={12}>
             <MenuAppBar/>
         </Grid>
+        <Grid item xs={12} md={10} lg={7}>
         <form onSubmit={formik.handleSubmit}>
       <Grid
         container
@@ -139,6 +140,7 @@ export default function Shipping() {
      
       </Grid>
       </form>
+      </Grid>
     </Grid>
   );
 }

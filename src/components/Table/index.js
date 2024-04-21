@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 // material-ui
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
@@ -249,7 +249,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    minWidth: 200,
   },
 }));
 
@@ -257,7 +257,8 @@ const OrderList = () => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const counter = useSelector(state => state.cart)
+  const counter = useSelector(state => state.cart);
+  const dispatch = useDispatch()
 
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -266,6 +267,10 @@ const OrderList = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [search, setSearch] = React.useState("");
   const [rows, setRows] = React.useState(counter);
+
+  React.useEffect(()=>{
+    setRows(counter)
+  },[counter])
 
   const handleSearch = (event) => {
     const newString = event.target.value;
@@ -334,7 +339,7 @@ const OrderList = () => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Grid container justifyContent="center" alignItems="center">
+    <Grid container justifyContent="center" alignItems="center" key={rows.length}>
       <Grid item xs={12}>
       <CardContent>
         <Grid
@@ -414,11 +419,9 @@ const OrderList = () => {
 
                     <TableCell align="right">{row.price}</TableCell>
 
-                    <TableCell align="center">
-                      <Chip label="Add More" size="small" chipcolor="primary" />
-                    </TableCell>
+                   
                     <TableCell align="center" sx={{ pr: 3 }}>
-                      <IconButton color="secondary">
+                      <IconButton color="secondary" onClick={()=>dispatch({type:"REMOVE",data:row})}>
                         <DeleteIcon sx={{ fontSize: "1.3rem" }} />
                       </IconButton>
                     </TableCell>
